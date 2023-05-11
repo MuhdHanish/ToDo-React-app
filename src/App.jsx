@@ -13,6 +13,13 @@ function App() {
   ];
   const [toDos, setToDos] = useState([]);
   const [toDo, setToDo] = useState("");
+  const RegExp = (/^[a-zA-Z0-9 ]+$/)
+  const del = (id) =>{
+    const newToDo = toDos.filter((obj)=>{
+      return obj.id !== id;
+    }) 
+    setToDos(newToDo);
+  }
   return (
     <div className="app">
       <div className="mainHeading">
@@ -32,7 +39,12 @@ function App() {
         <i
           className="fas fa-plus"
           onClick={() =>
-            setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])
+            {
+              if(RegExp.test(toDo)){
+                setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])
+                setToDo('')
+              }
+            }
           }
         ></i>
       </div>
@@ -57,13 +69,13 @@ function App() {
                   <p>{todo.text}</p>
                 </div>
                 <div className="right">
-                  <i className="fas fa-times"></i>
+                  <i className="fas fa-times" onClick={()=>del(todo.id)}></i>
                 </div>
               </div>
           );
           })
         }
-        <h2 style={{marginTop:'5px',color:'white'}}>Completed Task</h2>
+        <h2 style={{marginTop:'50px',color:'white'}}>Completed Task</h2>
          {
           toDos.map((obj)=>{
             if(obj.status){

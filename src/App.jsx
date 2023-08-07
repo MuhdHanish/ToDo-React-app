@@ -11,6 +11,7 @@ function App() {
     "Friday",
     "Saturday",
   ];
+  
   const [toDos, setToDos] = useState([]);
   const [toDo, setToDo] = useState("");
   const RegExp = (/^[a-zA-Z0-9 ]+$/)
